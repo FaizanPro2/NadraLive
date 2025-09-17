@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nadra Live - Google Play Style</title>
+  <style>
+    html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: #fff;
+  font-family: Arial, sans-serif;
+  color: #202124;
+}
+
+.app-container {
+  min-height: 100vh;   /* full page height */
+  max-width: 480px;
+  margin: auto;
+  padding: 16px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header (Logo + Title) */
+.app-header {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;  /* fixed height */
+}
+
+.logo-circle {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  flex-shrink: 0;
+}
+.logo-circle canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+.logo-circle img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  clip-path: circle(50% at 50% 50%);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.app-details {
+  margin-left: 16px;
+  flex: 1;
+}
+.app-details h2 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: bold;
+}
+.app-details p {
+  margin: 4px 0;
+  font-size: 14px;
+  color: gray;
+}
+.rating {
+  margin-top: 10px;
+  font-size: 14px;
+}
+.rating span {
+  color: #f9a825;
+  font-size: 16px;
+}
+
+/* Buttons */
+.install-btn, .cancel-btn, .save-btn {
+  margin-top: 20px;
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s;
+  flex-shrink: 0; /* fix buttons */
+}
+.install-btn { background: #2e7d32; color: #fff; }
+.cancel-btn { background: #d32f2f; color: #fff; display: none; }
+.save-btn { background: #1e88e5; color: #fff; display: none; }
+
+.progress-info {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 14px;
+  color: gray;
+  display: none;
+  flex-shrink: 0;
+}
+
+/* Scrollable Section */
+.content {
+  flex-grow: 1;         /* takes remaining height */
+  overflow-y: auto;     /* scrolls if needed */
+  padding-bottom: 40px; /* spacing at bottom */
+}
+
+/* Screenshots */
+.screenshots {
+  margin-top: 24px;
+  display: flex;
+  overflow-x: auto;
+  gap: 12px;
+}
+.screenshots img {
+  height: 220px;
+  border-radius: 8px;
+}
+
+/* Description */
+.description {
+  margin-top: 24px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Reviews */
+.reviews {
+  margin-top: 24px;
+  padding: 12px;
+  background: #f9f9f9;
+  border-radius: 8px;
+}
+.review {
+  margin-bottom: 12px;
+}
+.review strong {
+  display: block;
+  font-size: 14px;
+}
+.review span {
+  color: #f9a825;
+  font-size: 13px;
+}  </style>
+</head>
+<body>
+
+<div class="app-container">
+  <!-- Header -->
+  <div class="app-header">
+    <div class="logo-circle">
+      <canvas id="progressCanvas" width="100" height="100"></canvas>
+      <img src="https://i.ibb.co/LdsGzW9r/rsz-2b3f47c8fc577bd-file-000000009ef061f8abf730149689d4ac-wm.png" alt="Logo">
+    </div>
+    <div class="app-details">
+      <h2>Nadra Live</h2>
+      <p id="publisher">Publisher: Sohail Pro</p>
+      <div class="rating">⭐ 4.6 • 10k+ Users • 15k+ installs</div>
+    </div>
+  </div>
+
+  <!-- Buttons -->
+  <button id="downloadBtn" class="install-btn">Install</button>
+  <button id="cancelBtn" class="cancel-btn">Cancel Download</button>
+  <button id="saveBtn" class="save-btn">Save to Phone</button>
+
+  <!-- Progress Info -->
+  <div id="progressInfo" class="progress-info">
+    <span id="progressText">0%</span> · 
+    <span id="downloadSize">0 MB / 17 MB</span> · 
+    <span id="speedInfo">0 KB/s</span>
+  </div>
+
+  <!-- Screenshots -->
+  <div class="screenshots">
+      
+    <img src="https://i.ibb.co/v64WMv4B/Screenshot-20250918-012637.png" alt="s1">
+    <img src="https://i.ibb.co/sJ9H1XbV/Screenshot-20250918-012655.png" alt="s2">
+    <img src="https://i.ibb.co/W4XDq9h6/Screenshot-20250918-012722.png" alt="s3">
+    <img src="https://i.ibb.co/v64WMv4B/Screenshot-20250918-012637.png" alt="s4">
+  </div>
+
+  <!-- Description -->
+  <div class="description">
+    Nadra Live is your official government app to check and manage CNIC, family tree, 
+    certificates, and other government records.  
+    <br><br>
+    ⚡ VIP Features:<br>
+    • Fast CNIC search<br>
+    • Family Tree lookup<br>
+    • Vaccine records<br>
+    • Secure data access
+  </div>
+
+  <!-- Reviews -->
+  <div class="reviews">
+    <div class="review">
+      <strong>Ali Hassan</strong>
+      <span>⭐⭐⭐⭐⭐</span>
+      <p>Very helpful app, easy to use!</p>
+    </div>
+    <div class="review">
+      <strong>Zuhaib Kasuri</strong>
+      <span>⭐⭐⭐⭐</span>
+      <p>Works smoothly, design is nice.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  const url = "https://upl1.apkadmin.com/cgi-bin/dl.cgi/j3fbbs4tvqvcb2r6kjx4iz5i6pscqtpctgwfins4jqhfknhxqa2w26q/Nadra_Live_4.6.3.apk";
+  const canvas = document.getElementById("progressCanvas");
+  const ctx = canvas.getContext("2d");
+  let fileBlob = null;
+  let controller = null;
+
+  function drawCircle(percent) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.lineWidth = 6;
+
+    // Gray background circle
+    ctx.strokeStyle = "#ddd";
+    ctx.beginPath();
+    ctx.arc(50, 50, 48, 0, 2 * Math.PI);
+    ctx.stroke();
+
+    // Blue progress circle
+    ctx.strokeStyle = "#1e88e5"; // 🔵 for red use "#d32f2f"
+    ctx.beginPath();
+    ctx.arc(50, 50, 48, -Math.PI / 2, (2 * Math.PI) * (percent / 100) - Math.PI / 2);
+    ctx.stroke();
+  }
+  drawCircle(0);
+
+  document.getElementById("downloadBtn").addEventListener("click", async () => {
+    document.getElementById("downloadBtn").style.display = "none";
+    document.getElementById("cancelBtn").style.display = "block";
+    document.getElementById("publisher").style.display = "none";
+    document.getElementById("progressInfo").style.display = "block";
+
+    controller = new AbortController();
+
+    const response = await fetch(url, {signal: controller.signal});
+    if (!response.ok) {
+      alert("Failed to start download!");
+      return;
+    }
+
+    const reader = response.body.getReader();
+    const contentLength = +response.headers.get("Content-Length") || 17 * 1024 * 1024;
+    let receivedLength = 0;
+    let chunks = [];
+    let lastTime = performance.now();
+    let lastLoaded = 0;
+
+    while (true) {
+      const {done, value} = await reader.read().catch(err => {return {done:true}});
+      if (done) break;
+
+      chunks.push(value);
+      receivedLength += value.length;
+
+      let percent = Math.floor((receivedLength / contentLength) * 100);
+      drawCircle(percent);
+      document.getElementById("progressText").textContent = percent + "%";
+
+      let mbReceived = (receivedLength / (1024*1024)).toFixed(1);
+      let mbTotal = (contentLength / (1024*1024)).toFixed(1);
+      document.getElementById("downloadSize").textContent = mbReceived + " MB / " + mbTotal + " MB";
+
+      let currentTime = performance.now();
+      let timeDiff = (currentTime - lastTime) / 1000;
+      if (timeDiff >= 1) {
+        let loadedDiff = receivedLength - lastLoaded;
+        let speedKB = (loadedDiff / 1024 / timeDiff).toFixed(1);
+        document.getElementById("speedInfo").textContent = speedKB + " KB/s";
+        lastTime = currentTime;
+        lastLoaded = receivedLength;
+      }
+    }
+
+    fileBlob = new Blob(chunks, {type: "application/vnd.android.package-archive"});
+
+    document.getElementById("cancelBtn").style.display = "none";
+    document.getElementById("saveBtn").style.display = "block";
+    document.getElementById("progressText").textContent = "100%";
+    document.getElementById("speedInfo").textContent = "Download complete";
+  });
+
+  document.getElementById("cancelBtn").addEventListener("click", () => {
+    if (controller) {
+      controller.abort();
+      alert("Download canceled!");
+      location.reload();
+    }
+  });
+
+  document.getElementById("saveBtn").addEventListener("click", () => {
+    if (!fileBlob) return alert("No file to save");
+    let link = document.createElement("a");
+    link.href = URL.createObjectURL(fileBlob);
+    link.download = "Nadra_Live_4.6.3.apk";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  });
+</script>
+
+</body>
+</html>
